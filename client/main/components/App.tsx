@@ -17,17 +17,24 @@ import {
 
 interface AppProps {
   todos: model.Todo[];
-  dispatch: Dispatch<{}>;
+  dispatch: Dispatch<{}>
+  transcript: string;
   startListening: any; //TODO handle
+  stopListening: any;
 }
 
 class App extends React.Component<AppProps> {
   render() {
-    const { todos, dispatch, startListening } = this.props;
-
+    const { todos, dispatch, startListening, transcript, stopListening } = this.props;
+    const headerProps = {
+      addTodo: (text: string) => dispatch(addTodo(text)),
+      startListening,
+      stopListening,
+      transcript
+    }
     return (
       <div className="todoapp">
-        <Header addTodo={(text: string) => dispatch(addTodo(text))} startListening={startListening} />
+        <Header {...headerProps}  />
         <MainSection
             todos={todos}
             editTodo={(t,s) => dispatch(editTodo(t, s))}

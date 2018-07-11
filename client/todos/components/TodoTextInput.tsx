@@ -40,6 +40,12 @@ class TodoTextInput extends React.Component<TodoTextInputProps, TodoTextInputSta
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.text !== prevProps.text) {
+      this.setState({text: this.props.text});
+    }
+  }
+
   render() {
     return (
       <input className={
