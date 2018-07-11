@@ -10,11 +10,12 @@ import {
   CLEAR_COMPLETED
 } from './constants/ActionTypes';
 
-const initialState: IState = [<Todo>{
-  text: 'Use Redux with TypeScript',
-  completed: false,
-  id: 0
-}];
+// const initialState: IState = [<Todo>{
+//   text: 'Use Redux with TypeScript',
+//   completed: false,
+//   id: 0
+// }];
+const initialState: IState = [];
 
 export default handleActions<IState, Todo>({
   [ADD_TODO]: (state: IState, action: Action<Todo>): IState => {

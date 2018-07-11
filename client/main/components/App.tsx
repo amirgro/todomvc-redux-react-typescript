@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import * as React from 'react';
+import SpeechRecognition from 'react-speech-recognition' 
 
 import {
   Header,
@@ -17,15 +18,16 @@ import {
 interface AppProps {
   todos: model.Todo[];
   dispatch: Dispatch<{}>;
+  startListening: any; //TODO handle
 }
 
 class App extends React.Component<AppProps> {
   render() {
-    const { todos, dispatch } = this.props;
+    const { todos, dispatch, startListening } = this.props;
 
     return (
       <div className="todoapp">
-        <Header addTodo={(text: string) => dispatch(addTodo(text))} />
+        <Header addTodo={(text: string) => dispatch(addTodo(text))} startListening={startListening} />
         <MainSection
             todos={todos}
             editTodo={(t,s) => dispatch(editTodo(t, s))}
@@ -42,4 +44,5 @@ const mapStateToProps = state => ({
   todos: state.todos
 });
 
-export default connect(mapStateToProps)(App);
+const speechRecognitionoptions = {autoStart: false}
+export default connect(mapStateToProps)(SpeechRecognition(speechRecognitionoptions)(App));
